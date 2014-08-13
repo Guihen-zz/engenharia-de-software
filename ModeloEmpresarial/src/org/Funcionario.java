@@ -38,5 +38,9 @@ public class Funcionario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public float calculaSalario( int mes, int ano) {
+		return salarioBase;
+	}
 	
 }

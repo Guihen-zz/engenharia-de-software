@@ -1,12 +1,13 @@
 package org;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Empresa {
 
 	private List <Funcionario> funcionarios;
-	private Financeiro financeiro;
 	
 	public Empresa() {
 		funcionarios = new LinkedList<Funcionario>();
@@ -19,21 +20,24 @@ public class Empresa {
 	public List <Funcionario> getFuncionarios() {
 		return funcionarios;
 	}
-
-	public void setFinanceiro(Financeiro financeiro) {
-		this.financeiro = financeiro;
-	}
-
-	public Financeiro getFinanceiro() {
-		return financeiro;
-	}
 	
 	public void contrata(Funcionario funcionario) {
 		this.funcionarios.add(funcionario);
 		
 	}
 
-	public void contrata(Financeiro financeiro) {
-		this.financeiro = financeiro;
+	public float calculaValorDaFolhaDePagamento() {
+	    float folhaDePagamento = 0;
+	    Calendar calendar = Calendar.getInstance();
+	    int ano = calendar.get(Calendar.YEAR);  
+	    int mes = calendar.get(Calendar.MONTH)+1;
+	    
+	    ListIterator<Funcionario> iteradorDeFuncionarios = funcionarios.listIterator();
+	    while( iteradorDeFuncionarios.hasNext()) {
+			folhaDePagamento += iteradorDeFuncionarios.next().calculaSalario( mes, ano); 
+		}
+		return folhaDePagamento;
 	}
+
+	
 }
